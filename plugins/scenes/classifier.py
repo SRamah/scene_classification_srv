@@ -36,7 +36,7 @@ class SceneClassification:
         scenes_pred = self.model.predict(imgs_data)
         scenes_ids = np.argmax(scenes_pred, axis = 1)
         get_label = lambda index: self.scenes_index.get(index)
-        format_scores = lambda s: {get_label(i):round(s[i],2) for i in range(len(s))} 
+        format_scores = lambda s: {get_label(i):round(float(s[i]),2) for i in range(len(s))} 
         results = [{'image_url':images_url[i], 
                     'scene_label':get_label(scenes_ids[i]),
                     'scores':format_scores(scenes_pred[i])} for i in range(len(images_url))]
