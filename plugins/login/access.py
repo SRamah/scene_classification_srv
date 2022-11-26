@@ -4,8 +4,8 @@ from app import schemas
 # Load users_db
 users_db = [{
     "fullname": "admin", 
-    "email":os.environ['FIRST_SUPERUSER'], 
-    "password":os.environ['FIRST_SUPERUSER_PASSWORD']
+    "email":os.environ['SUPERUSER'], 
+    "password":os.environ['SUPERUSER_PASSWORD']
     }]
 
 def add_user(data: schemas.UserSchema):

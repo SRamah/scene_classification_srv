@@ -4,9 +4,9 @@ import jwt
 from decouple import config
 
 
-JWT_SECRET = config("secret")
-JWT_ALGORITHM = config("algorithm")
-ADMIN = config("admin")
+JWT_SECRET = config("SECRET_KEY")
+JWT_ALGORITHM = config("JWT_ALGORITHM")
+ADMIN = config("SUPERUSER")
 
 
 def token_response(token: str):
