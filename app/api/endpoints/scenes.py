@@ -1,0 +1,18 @@
+from fastapi import APIRouter, Depends, HTTPException
+from typing import List, Dict
+from auth.auth_bearer import JWTBearer
+from plugins.scenes.classifier import SceneClassification
+from app import schemas
+
+SC = SceneClassification()
+
+router = APIRouter()
+
+@router.get("/", response_model=Dict)
+def root():
+    return {"message": "Welcome to Scene Classification Service."}
+
+@router.get("/label/", response_model=List[schemas.SceneClassifier], dependencies=[Depends(JWTBearer())])
+def scene_label(images: List[str]):
+    results = SC.img_classification(images)
+    return results

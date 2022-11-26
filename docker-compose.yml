@@ -1,0 +1,17 @@
+version: '3'
+services:
+    backend:
+        image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
+        env_file:
+            - .env
+        environment:
+            - SERVER_NAME=${DOMAIN?Variable not set}
+            - SERVER_HOST=https://${DOMAIN?Variable not set}
+            # Allow explicit env var override for tests
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+            - "8081:8000"
+        volumes:
+            - ".:/workspace:rw"
