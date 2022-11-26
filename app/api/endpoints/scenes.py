@@ -12,7 +12,7 @@ router = APIRouter()
 def root():
     return {"message": "Welcome to Scene Classification Service."}
 
-@router.get("/label/", response_model=List[schemas.SceneClassifier], dependencies=[Depends(JWTBearer())])
+@router.get("/label/", response_model=List[schemas.SceneClassifierOutput], dependencies=[Depends(JWTBearer())])
 def scene_label(images: List[str]):
     results = SC.img_classification(images)
     return results
