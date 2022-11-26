@@ -7,11 +7,8 @@ import plugins.login.access as helper
 
 router = APIRouter()
 
-@router.get("/test-auth/", dependencies=[Depends(JWTBearer())], tags=["auth"])
-def test_auth():
-    return 200,'Successful Test'
 
-@router.post("/signup/", tags=["auth"])
+@router.post("/signup/")
 async def create_user(user: schemas.UserSchema = Body(...)):
     token = {}
     if helper.add_user(user):
@@ -21,7 +18,7 @@ async def create_user(user: schemas.UserSchema = Body(...)):
     return token
 
 
-@router.post("/login/", tags=["auth"])
+@router.post("/login/")
 async def user_login(user: schemas.UserLoginSchema = Body(...)):
     token = {}
     if helper.check_user(user):
