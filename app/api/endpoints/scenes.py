@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List, Dict
-from auth.auth_bearer import JWTBearer
+from app.auth.auth_bearer import JWTBearer
 from plugins.scenes.classifier import SceneClassification
 from app import schemas
 

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Body, HTTPException
-from auth.auth_bearer import JWTBearer
+from app.auth.auth_bearer import JWTBearer
 from app.auth.auth_handler import signJWT
 
 from app import schemas
