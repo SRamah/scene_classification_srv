@@ -2,7 +2,7 @@ import numpy as np
 from keras.models import model_from_json
 import cv2
 import requests
-import plugins.scenes.params as conf
+import backend.plugins.scenes.params as conf
 
 class SceneClassification:
     def __init__(self):
