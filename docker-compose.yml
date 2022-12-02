@@ -18,7 +18,9 @@ services:
             - "/tmp:/tmp:rw"
     
     frontend:
-        image: 'frontend:0.1'
+        image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
+        env_file:
+            - .env
         build:
           context: ./frontend
           dockerfile: frontend.dockerfile

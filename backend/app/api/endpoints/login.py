@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, Body, HTTPException
-from backend.app.auth.auth_bearer import JWTBearer
-from backend.app.auth.auth_handler import signJWT
+from app.auth.auth_bearer import JWTBearer
+from app.auth.auth_handler import signJWT
 
-from backend.app import schemas
-import backend.app.core.access as helper
+from app import schemas
+import app.core.access as helper
 
 router = APIRouter()
 
