@@ -5,7 +5,7 @@ import os, time
 from PIL import Image
 import streamlit.components.v1 as com
 
-import helpers as classifier
+import frontend.helpers as classifier
 
 
 st.title('Image Scene Classification 🤖')

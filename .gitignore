@@ -50,3 +50,4 @@ Thumbs.db
 
 *.h5
 frontend/docker-compose.yml
+__pycache__/

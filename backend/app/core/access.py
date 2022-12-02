@@ -1,5 +1,5 @@
 import os
-from app import schemas
+from backend.app import schemas
 
 # Load users_db
 users_db = [{
