@@ -9,9 +9,21 @@ services:
             - SERVER_HOST=https://${DOMAIN?Variable not set}
             # Allow explicit env var override for tests
         build:
-          context: .
-          dockerfile: Dockerfile
+          context: ./backend
+          dockerfile: backend.dockerfile
         ports:
             - "8081:8000"
         volumes:
             - ".:/workspace:rw"
+            - "/tmp:/tmp:rw"
+    
+    frontend:
+        image: 'frontend:0.1'
+        build:
+          context: ./frontend
+          dockerfile: frontend.dockerfile
+        ports:
+            - "8585:8501"
+        volumes:
+            - ".:/app:rw"
+            - "/tmp:/tmp:rw"
