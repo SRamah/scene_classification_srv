@@ -2,6 +2,8 @@ import numpy as np
 from keras.models import model_from_json
 import cv2
 import requests
+from urllib import request
+import os
 import plugins.scenes.params as conf
 
 class SceneClassification:
@@ -15,8 +17,13 @@ class SceneClassification:
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        # load weights into new model
-        loaded_model.load_weights(conf.model_path+"top_model_weights.h5")
+        model_file_path = conf.model_path+"top_model_weights.h5"
+        # Check whether a path pointing to a file
+        if not os.path.isfile(model_file_path):
+            request.urlretrieve(conf.model_file_url, model_file_path)
+        else:
+            # load weights into new model
+            loaded_model.load_weights(model_file_path)
         return loaded_model
 
     def prepere_data(self, images_url=[]):
