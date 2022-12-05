@@ -7,7 +7,7 @@ WORKDIR /workspace
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
-COPY ./backend ./
+COPY . ./
 
 RUN wget -P ./plugins/scenes/algos/cnn/ https://mys3db.s3.eu-west-3.amazonaws.com/public_repo/Scene_Classification_Models/cnn/top_model_weights.h5
 
