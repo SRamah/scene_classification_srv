@@ -14,10 +14,11 @@ services:
         ports:
             - "8081:8000"
         volumes:
-            - "./backend:/workspace:rw"
+            - "./backend:/home/ramah:rw"
             - "/tmp:/tmp:rw"
         entrypoint:
-            - entrypoint.sh
+            - /home/ramah/entrypoint.sh
+        user: "1001"
     
     frontend:
         image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
