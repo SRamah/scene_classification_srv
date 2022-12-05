@@ -9,6 +9,4 @@ RUN pip install -r requirements.txt
 
 COPY . ./
 
-RUN chmod +x entrypoint.sh
-
-ENTRYPOINT [ "./entrypoint.sh" ]
+CMD uvicorn --host=0.0.0.0 main:app --reload

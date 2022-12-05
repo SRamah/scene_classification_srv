@@ -51,3 +51,4 @@ Thumbs.db
 *.h5
 frontend/docker-compose.yml
 __pycache__/
+backend/entrypoint.sh
