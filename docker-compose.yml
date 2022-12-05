@@ -16,6 +16,8 @@ services:
         volumes:
             - "./backend:/workspace:rw"
             - "/tmp:/tmp:rw"
+        entrypoint:
+            - entrypoint.sh
     
     frontend:
         image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
