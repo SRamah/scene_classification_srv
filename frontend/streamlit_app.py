@@ -35,7 +35,7 @@ with st.container():
         # To read image file as a PIL Image:
         image = Image.open(uploaded_image)
         col1.image(image, caption="Uploaded Image.", use_column_width=True)
-        # Upload the image to S3
+        # Upload the image FastApi
         image_url = file_path
         
     
