@@ -33,7 +33,10 @@ class SceneClassification:
             res = requests.get(img, stream=True)
             if res.status_code == 200:
                 arr = np.asarray(bytearray(res.raw.read()), dtype=np.uint8)
-                testImgs.append(cv2.resize(cv2.imdecode(arr, -1), (150, 150)))
+                # Convert image to the 3 channel BGR color image.
+                imageBGR = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+                imageRGB = cv2.cvtColor(imageBGR , cv2.COLOR_BGR2RGB)
+                testImgs.append(cv2.resize(imageRGB, (150, 150)))
             else:
                 pass
         testImgs = np.asarray(testImgs)
@@ -53,7 +56,9 @@ class SceneClassification:
 
     def img_obj_classification(self, img_obj=[]):
         img_arr = np.asarray(bytearray(img_obj), dtype=np.uint8)
-        imgs_data = [cv2.resize(cv2.imdecode(img_arr, -1), (150, 150))]
+        imageBGR = cv2.imdecode(img_arr, cv2.IMREAD_COLOR)
+        imageRGB = cv2.cvtColor(imageBGR , cv2.COLOR_BGR2RGB)
+        imgs_data = [cv2.resize(imageRGB, (150, 150))]
         scenes_pred = self.model.predict(imgs_data)
         scenes_ids = np.argmax(scenes_pred, axis = 1)
         get_label = lambda index: self.scenes_index.get(index)
