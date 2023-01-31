@@ -20,7 +20,7 @@ def update_access_token():
 
 
 def get_label(image_url:str):
-    address = os.environ['BACKEND_HOST_ADDRESS']+"/api/v1/scenes/url/label"
+    address = os.environ['BACKEND_HOST_ADDRESS']+"/api/v1/scenes/url/label/"
     payload = [image_url]
     headers = {
         "accept": "application/json",
