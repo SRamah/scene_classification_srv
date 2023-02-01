@@ -38,3 +38,22 @@ def get_label(image_url:str):
         print(" [X] Exception at get classified label: ", e)
         result = {}
     return result
+
+def get_label_obj(image_obj):
+    address = os.environ['BACKEND_HOST_ADDRESS']+"/api/v1/scenes/obj/label/"
+    headers = {
+        "accept": "application/json",
+        "Authorization": os.environ['ACCESS_TOKEN'],
+        "Content-Type": "application/json"
+    }
+    try:
+        response = requests.request("PUT", address, files={'file': image_obj}, headers=headers).json()
+        if isinstance(response, dict) and response.get("detail"):
+            ## Update the ACCESS_TOKEN
+            update_access_token()
+            return get_label_obj(image_obj)
+        result = response[0]
+    except Exception as e:
+        print(" [X] Exception at get classified label: ", e)
+        result = {}
+    return result

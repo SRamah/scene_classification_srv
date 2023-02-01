@@ -15,7 +15,6 @@ services:
             - "8081:8000"
         volumes:
             - "./backend:/workspace:rw"
-            - "/tmp:/tmp:rw"
     
     frontend:
         image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
@@ -28,4 +27,22 @@ services:
             - "8585:8501"
         volumes:
             - "./frontend:/app:rw"
-            - "/tmp:/tmp:rw"
+
+    https-portal:
+        image: steveltn/https-portal:1
+        ports:
+            - '80:80'
+            - '443:443'
+        links:
+            - backend
+            - frontend
+        restart: always
+        environment:
+            DOMAINS: 'scene-recognition.backend.recipi.io => http://scene-recognition.backend.recipi.io:8081/docs, scene-recognition.recipi.io => http://scene-recognition.recipi.io:8585'
+            # STAGE: 'production' # Don't use production until staging works
+            # FORCE_RENEW: 'true'
+        volumes: 
+            - https-portal-data:/var/lib/https-portal
+    
+volumes:
+    https-portal-data:

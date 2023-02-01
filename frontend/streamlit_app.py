@@ -27,22 +27,18 @@ with st.container():
         if image_url:
             col1.image(image_url)
     else:
-        #Save Uploaded Files to /tmp Directory
-        file_path = os.path.join("/tmp",uploaded_image.name)
-        with open(file_path, 'wb') as f: 
-            f.write(uploaded_image.getbuffer())
-        
         # To read image file as a PIL Image:
         image = Image.open(uploaded_image)
         col1.image(image, caption="Uploaded Image.", use_column_width=True)
-        # Upload the image FastApi
-        image_url = file_path
         
     
-    if st.button("Label Prediction") and image_url:
+    if st.button("Label Prediction") and (image_url or uploaded_image):
         with st.spinner("Doing the math..."):
             ##### Get Classification label ######
-            api_response =  classifier.get_label(image_url)
+            if image_url:
+                api_response =  classifier.get_label(image_url)
+            else:
+                api_response =  classifier.get_label_obj(uploaded_image.getbuffer())
             #####################################
             st.write("It looks like a **"+ str(api_response.get("scene_label")) + "** scene")
             scores = api_response.get("scores")

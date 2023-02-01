@@ -54,10 +54,8 @@ class SceneClassification:
                     'scores':format_scores(scenes_pred[i])} for i in range(len(images_url))]
         return results
 
-    def img_obj_classification(self, img_obj=[]):
-        img_arr = np.asarray(bytearray(img_obj), dtype=np.uint8)
-        imageBGR = cv2.imdecode(img_arr, cv2.IMREAD_COLOR)
-        imageRGB = cv2.cvtColor(imageBGR , cv2.COLOR_BGR2RGB)
+    def img_obj_classification(self, img_obj):
+        imageRGB = np.array(img_obj.convert(mode='RGB')) / 255
         imgs_data = [cv2.resize(imageRGB, (150, 150))]
         scenes_pred = self.model.predict(imgs_data)
         scenes_ids = np.argmax(scenes_pred, axis = 1)
@@ -73,5 +71,5 @@ if __name__ == "__main__":
     images_url = ["https://storage.googleapis.com/yk-cdn/photos/pdp/adam-burton/valley-of-the-ten-peaks.jpg",
              "https://img.freepik.com/photos-gratuite/belle-photo-foret-grands-arbres-verts_181624-20615.jpg"]
     SC = SceneClassification()
-    results = SC.img_classification(images_url)
+    results = SC.img_urls_classification(images_url)
     print(results)
