@@ -54,16 +54,18 @@ class SceneClassification:
                     'scores':format_scores(scenes_pred[i])} for i in range(len(images_url))]
         return results
 
-    def img_obj_classification(self, img_obj):
-        imageRGB = np.array(img_obj.convert(mode='RGB')) / 255
+    def img_obj_classification(self, img_obj, img_filename:str=""):
+        imageRGB = np.array(img_obj.convert(mode='RGB'))
         imgs_data = [cv2.resize(imageRGB, (150, 150))]
-        scenes_pred = self.model.predict(imgs_data)
+        testImgs = np.asarray(imgs_data)
+        testImgs = testImgs / 255
+        scenes_pred = self.model.predict(testImgs)
         scenes_ids = np.argmax(scenes_pred, axis = 1)
         get_label = lambda index: self.scenes_index.get(index)
         format_scores = lambda s: {get_label(i):round(float(s[i]),2) for i in range(len(s))} 
-        results = [{'image_url':images_url[i], 
-                    'scene_label':get_label(scenes_ids[i]),
-                    'scores':format_scores(scenes_pred[i])} for i in range(len(images_url))]
+        results = [{'image_url':img_filename, 
+                    'scene_label':get_label(scenes_ids[0]),
+                    'scores':format_scores(scenes_pred[0])}]
         return results
 
 

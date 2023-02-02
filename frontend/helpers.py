@@ -44,10 +44,13 @@ def get_label_obj(image_obj):
     headers = {
         "accept": "application/json",
         "Authorization": os.environ['ACCESS_TOKEN'],
-        "Content-Type": "application/json"
+        # 'Content-Type': 'multipart/form-data',
+    }
+    files = {
+        'img': image_obj
     }
     try:
-        response = requests.request("PUT", address, files={'file': image_obj}, headers=headers).json()
+        response = requests.post(address, headers=headers, files=files).json()
         if isinstance(response, dict) and response.get("detail"):
             ## Update the ACCESS_TOKEN
             update_access_token()

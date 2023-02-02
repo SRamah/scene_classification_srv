@@ -24,7 +24,7 @@ async def scene_label_from_urls(images: List[str]):
 #     return results
 
 @router.post("/obj/label/", response_model=List[schemas.SceneClassifierOutput], dependencies=[Depends(JWTBearer())])
-async def scene_label_from_img(img: UploadFile = File()):
+async def scene_label_from_img(img: UploadFile):
     image = Image.open(img.file)
-    result = SC.img_obj_classification(image)
+    result = SC.img_obj_classification(image, "./"+img.filename)
     return result
