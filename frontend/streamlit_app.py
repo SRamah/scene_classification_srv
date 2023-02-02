@@ -23,7 +23,7 @@ image_url = ""
 with st.container():
     col1, col2 = st.columns([5,3])
     if uploaded_image is None:
-        image_url = st.text_input('Or add a URL link', placeholder="https://images/photo.png")
+        image_url = st.text_input('Or add an URL link', placeholder="https://images/photo.png")
         if image_url:
             col1.image(image_url)
     else:
