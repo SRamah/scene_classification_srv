@@ -2,6 +2,7 @@
 
 Designed and implemented a natural scene image classification service from the ground up, utilizing Docker for containerization, Python for programming, a convolutional neural network (CNN) as the machine learning model, FastAPI for the backend, Streamlit for the frontend and S3 for model storage. The CNN model was trained to classify natural scene images into six distinct categories: buildings, forest, glacier, mountain, sea and street.
 
+![A test image](exemple.png)
 
 ## Requirments
 ```
