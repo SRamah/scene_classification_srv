@@ -38,9 +38,10 @@ services:
             - frontend
         restart: always
         environment:
-            DOMAINS: 'scene-recognition.backend.recipi.io => http://scene-recognition.backend.recipi.io:8081/docs, scene-recognition.recipi.io => http://scene-recognition.recipi.io:8585'
-            # STAGE: 'production' # Don't use production until staging works
+            DOMAINS: 'scene-recognition.backend.recipi.io -> http://backend:8000, scene-recognition.recipi.io -> http://frontend:8501'
+            STAGE: 'production' # Don't use production until staging works
             # FORCE_RENEW: 'true'
+            WEBSOCKET: 'true'
         volumes: 
             - https-portal-data:/var/lib/https-portal
     
